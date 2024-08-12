@@ -1,0 +1,180 @@
+@use '@angular/material' as mat;
+@include mat.core();
+
+// #region gama colores
+$my-primary-color: (
+  50: #e1e2f3,
+  100: #b4b6e1,
+  200: #8286ce,
+  300: #5055ba,
+  400: #2b30ab,
+  500: #050c9c,
+  600: #040a94,
+  700: #04088a,
+  800: #030680,
+  900: #01036e,
+  A100: #9d9dff,
+  A200: #6a6aff,
+  A400: #3737ff,
+  A700: #1e1eff,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff,
+  ),
+);
+
+$my-accent-color: (
+  50: #fff9e9,
+  100: #fff0c9,
+  200: #ffe6a5,
+  300: #ffdc81,
+  400: #ffd566,
+  500: #ffcd4b,
+  600: #ffc844,
+  700: #ffc13b,
+  800: #ffba33,
+  900: #ffae23,
+  A100: #ffffff,
+  A200: #ffffff,
+  A400: #ffedd2,
+  A700: #ffe3b8,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000,
+  ),
+);
+
+$default-colors: (
+  black: #000000,
+  white: #ffffff,
+  primary: map-get($my-primary-color, 500),
+  accent: map-get($my-accent-color, 500),
+  warn: map-get(mat.$red-palette, 500),
+);
+// #endregion
+
+$Venturessoft-proyect-primary: mat.define-palette($my-primary-color);
+$Venturessoft-proyect-accent: mat.define-palette($my-accent-color);
+$Venturessoft-proyect-warn: mat.define-palette(mat.$red-palette);
+
+$Venturessoft-proyect-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $Venturessoft-proyect-primary,
+      accent: $Venturessoft-proyect-accent,
+      warn: $Venturessoft-proyect-warn,
+    ),
+    density: 0,
+  )
+);
+
+@include mat.all-component-themes($Venturessoft-proyect-theme);
+
+// Mixin para aplicar colores
+@mixin bg-color-primary($shade) {
+  background-color: map-get($my-primary-color, $shade);
+}
+@mixin text-color-primary($shade) {
+  color: map-get($my-primary-color, $shade);
+}
+@mixin border-color-primary($shade) {
+  border-color: map-get($my-primary-color, $shade);
+}
+// accent
+@mixin bg-color-accent($shade) {
+  background-color: map-get($my-accent-color, $shade);
+}
+@mixin text-color-accent($shade) {
+  color: map-get($my-accent-color, $shade);
+}
+@mixin border-color-accent($shade) {
+  border-color: map-get($my-accent-color, $shade);
+}
+
+// Genera clases para cada color de la paleta
+@each $key, $color in $my-primary-color {
+  @if $key != 'contrast' {
+    .bg-primary-#{$key} {
+      @include bg-color-primary($key);
+    }
+
+    .text-primary-#{$key} {
+      @include text-color-primary($key);
+    }
+
+    .border-primary-#{$key} {
+      @include border-color-primary($key);
+    }
+  }
+}
+// accent
+@each $key, $color in $my-accent-color {
+  @if $key != 'contrast' {
+    .bg-accent-#{$key} {
+      @include bg-color-accent($key);
+    }
+
+    .text-accent-#{$key} {
+      @include text-color-accent($key);
+    }
+
+    .border-accent-#{$key} {
+      @include border-color-accent($key);
+    }
+  }
+}
+// clases default
+@each $key, $color in $default-colors {
+  .#{'bg-' + $key} {
+    background-color: $color;
+  }
+
+  .#{'text-' + $key} {
+    color: $color;
+  }
+
+  .#{'Iborder-' + $key} {
+    border-color: $color;
+  }
+
+  .#{'Ibg-' + $key} {
+    background-color: $color !important;
+  }
+
+  .#{'Itext-' + $key} {
+    color: $color !important;
+  }
+
+  .#{'Iborder-' + $key} {
+    border-color: $color !important;
+  }
+}
+
+// add tailwind
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

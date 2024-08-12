@@ -1,0 +1,19 @@
+<section class="to-white mt-20 min-h-[500px] w-full bg-gradient-to-b from-primary-500">
+  <figure class="container mx-auto px-5">
+    <p class="text-white w-full pt-20 text-center text-6xl font-medium">Unlock the full power of</p>
+    <div class="mt-28 flex flex-wrap">
+      <ng-container *ngIf="cards.length">
+        <app-card-brand-gallery
+          *ngFor="let card of cards"
+          [card]="card"
+          chipColor="bg-primary"
+          chipTextColor="text-white"
+          class="w-1/2 max-[321px]:w-full lg:w-1/4" />
+      </ng-container>
+    </div>
+  </figure>
+</section>
+
+<div class="mt- container mx-auto my-10 flex justify-center">
+  <app-button-link-card />
+</div>

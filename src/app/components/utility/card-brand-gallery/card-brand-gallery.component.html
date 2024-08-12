@@ -1,0 +1,29 @@
+<figure class="w-full p-5">
+  <figcaption class="bg-white rounded shadow">
+    <div class="relative">
+      <div class="bg-slate-100 flex w-full items-center justify-center rounded-t py-4">
+        <div class="h-32 w-3/4">
+          <img
+            *ngIf="card.img"
+            loading="lazy"
+            src="{{ card.img }}"
+            alt="image url"
+            class="h-full w-full object-contain" />
+        </div>
+      </div>
+
+      <div
+        [ngClass]="[chipColor, chipTextColor]"
+        class="absolute -bottom-4 left-2 flex items-center gap-2 rounded-full px-2 py-1 max-md:left-0 max-md:w-full max-md:text-sm">
+        <mat-icon>shopping_basket</mat-icon>
+        <span class="max-md:truncate">
+          {{ card.brandName }}
+        </span>
+      </div>
+    </div>
+
+    <div class="mt-2 min-h-20 p-4 max-md:mt-5">
+      {{ card.text }}
+    </div>
+  </figcaption>
+</figure>

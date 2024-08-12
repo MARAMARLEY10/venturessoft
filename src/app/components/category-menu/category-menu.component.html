@@ -1,0 +1,22 @@
+<section class="container mx-auto mt-8 p-5">
+  <p class="text-center text-5xl font-bold">
+    {{ text.title }}
+  </p>
+
+  <div class="mt-8 flex min-h-20 flex-wrap justify-center gap-4 py-2">
+    <ng-container *ngIf="categoriesMenu.length">
+      <button
+        *ngFor="let item of categoriesMenu"
+        mat-flat-button
+        class="!rounded-full transition-all active:scale-95"
+        [ngClass]="{ '!bg-black !text-white': item.isActive, '!bg-slate-100': !item.isActive }"
+        (click)="setActive(item)">
+        {{ item.text }}
+      </button>
+    </ng-container>
+
+    <ng-container *ngIf="!categoriesMenu.length">
+      <app-load-spiner />
+    </ng-container>
+  </div>
+</section>

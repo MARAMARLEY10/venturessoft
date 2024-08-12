@@ -1,0 +1,49 @@
+<section class="container mx-auto mt-8 p-5">
+  <figure class="flex items-center justify-between">
+    <figcaption class="font-medium">{{ text.counter }} ({{ cards.length }})</figcaption>
+
+    <div class="flex items-center">
+      <button
+        *ngFor="let button of viewButtons"
+        mat-button
+        class="!px-0"
+        [ngClass]="{ 'Ibg-primary': button.isActive }"
+        (click)="setActiveButtonView(button)">
+        <mat-icon color="primary" class="!m-0" [ngClass]="{ 'bg-white': button.isActive }">
+          {{ button.icon }}
+        </mat-icon>
+      </button>
+    </div>
+  </figure>
+
+  <div class="mt-8 flex w-full flex-wrap">
+    <ng-container *ngIf="cards.length">
+      <app-card-brand-gallery
+        *ngFor="let card of cardsPaginated"
+        [card]="card"
+        [ngClass]="{
+          'w-1/2 md:w-4/12': getColsByViewSelected() == _EColsType.cols,
+          'w-full': getColsByViewSelected() == _EColsType.rows,
+        }" />
+
+      <div
+        class="flex w-full justify-center"
+        *ngIf="cards.length > 7 && cards.length != cardsPaginated.length">
+        <button
+          mat-flat-button
+          class="!rounded-full"
+          color="primary"
+          (click)="setCardsPaginated(false)">
+          <mat-icon>add_circle_outline</mat-icon>
+          {{ text.button }}
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!cards.length">
+      <div class="flex h-36 w-full items-center justify-center">
+        <app-load-spiner />
+      </div>
+    </ng-container>
+  </div>
+</section>
